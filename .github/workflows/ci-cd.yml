@@ -3,7 +3,7 @@ name: CI Pipeline
 on:
   push:
     branches:
-      -main
+      - main
 
 jobs:
   build:
@@ -16,12 +16,12 @@ jobs:
       - name: Check project files
         run: |
           ls -la
-          ls -la source
+          ls -la src
 
       - name: Build Docker image
-        run: | 
+        run: |
           docker build -t task-manager:ci .
 
-      - name: CI Success
+      - name: CI success
         run: |
           echo "CI Pipeline Completed Successfully"

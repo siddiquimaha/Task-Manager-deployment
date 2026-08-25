@@ -13,6 +13,7 @@ A simple and responsive Task Manager web application built with HTML5, CSS3, and
   - Completed
 - Add tasks using the Enter key
 - Responsive and clean user interface
+- Dockerfile added
 
 ## Technologies
 
