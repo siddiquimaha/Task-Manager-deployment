@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="task-manager">
+
+        <header class="task-manager__header">
+            <h1>Task Manager</h1>
+            <p>Organize your daily tasks efficiently.</p>
+        </header>
+
+        <section class="task-form">
+            <input
+                type="text"
+                id="taskInput"
+                class="task-form__input"
+                placeholder="Enter a new task"
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                id="addTaskButton"
+                class="task-form__button"
+            >
+                Add Task
+            </button>
+        </section>
+
+        <section class="task-controls">
+
+            <button
+                type="button"
+                class="filter-button filter-button--active"
+                data-filter="all"
+            >
+                All
+            </button>
+
+            <button
+                type="button"
+                class="filter-button"
+                data-filter="pending"
+            >
+                Pending
+            </button>
+
+            <button
+                type="button"
+                class="filter-button"
+                data-filter="completed"
+            >
+                Completed
+            </button>
+
+        </section>
+
+        <section class="task-list-section">
+
+            <ul id="taskList" class="task-list">
+            </ul>
+
+            <p id="emptyMessage" class="task-list__empty">
+                No tasks available.
+            </p>
+
+        </section>
+
+        <footer class="task-manager__footer">
+            <span id="taskCount">0 tasks</span>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
