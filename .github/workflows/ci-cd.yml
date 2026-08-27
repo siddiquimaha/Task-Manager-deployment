@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-
       - name: Build Docker image
         run: |
           docker build -t mahjabeensiddiqui/task-manager:latest .
@@ -33,6 +32,24 @@ jobs:
         run: |
           docker push mahjabeensiddiqui/task-manager:latest
 
-      - name: CICD success
-        run: |
-          echo "Docker image successfully pushed to Docker Hub"
+  deploy-to-ec2:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy application to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull mahjabeensiddiqui/task-manager:latest
+            docker stop task-manager || true
+            docker rm task-manager || true
+            docker run -d \
+              --name task-manager \
+              --restart unless-stopped \
+              -p 80:80 \
+              mahjabeensiddiqui/task-manager:latest
+            docker image prune -f
