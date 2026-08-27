@@ -32,7 +32,7 @@ body {
     margin-bottom: 8px;
 }
 
-.task-manager__header p {
+.task-manager__header p, h1 {
     color: #666;
 }
 
